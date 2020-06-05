@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Forecast</string>
+
+    <string name="places_title">Forecast</string>
+    <string name="places_error_subtitle">An error occured while trying to fetch the places.</string>
+    <string name="places_error_retry">Retry</string>
+    <string name="forecast_feels_like">Feels like %1$d%2$s</string>
+    <string name="forecast_degrees">%1$d %2$s</string>
+</resources>
