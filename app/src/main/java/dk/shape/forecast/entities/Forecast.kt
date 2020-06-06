@@ -12,9 +12,18 @@ data class Forecast(
         val currentDateString: String,
         val startDateString: String,
         val endDateString: String,
-        val currentWeather: CurrentWeather
+        val currentWeather: CurrentWeather,
+        val dailyWeather: List<ForecastThumbnail>
 )
 
 data class CurrentWeather(
     val feelsLike: Temperature
 )
+
+data class ForecastThumbnail(
+//        val temperature: Temperature,
+        val iconUrl: String,
+        val dayOfTheWeek: String
+)
+
+

@@ -5,13 +5,17 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.LinearLayoutManager
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.formatter.DefaultValueFormatter
 import dk.shape.forecast.AppConfig
 import dk.shape.forecast.R
 import dk.shape.forecast.entities.Forecast
+import dk.shape.forecast.entities.ForecastThumbnail
+import dk.shape.forecast.entities.Temperature
 import dk.shape.forecast.entities.toFloat
+import dk.shape.forecast.usecases.places.ui.list.PlacesAdapter
 import dk.shape.forecast.utils.ui.BaseActivity
 import dk.shape.forecast.utils.ui.celsiusToColor
 import dk.shape.forecast.utils.ui.extension.applyLocationDetailsStyle
@@ -23,6 +27,7 @@ import kotlinx.android.synthetic.main.activity_place_details.chart1
 import kotlinx.android.synthetic.main.activity_place_details.clRoot
 import kotlinx.android.synthetic.main.activity_place_details.ivWeatherBackground
 import kotlinx.android.synthetic.main.activity_place_details.ivWeatherIcon
+import kotlinx.android.synthetic.main.activity_place_details.rvForecast
 import kotlinx.android.synthetic.main.activity_place_details.tvDate
 import kotlinx.android.synthetic.main.activity_place_details.tvDegrees
 import kotlinx.android.synthetic.main.activity_place_details.tvEndTime
@@ -30,6 +35,7 @@ import kotlinx.android.synthetic.main.activity_place_details.tvFeelsLike
 import kotlinx.android.synthetic.main.activity_place_details.tvLocationName
 import kotlinx.android.synthetic.main.activity_place_details.tvStartTime
 import kotlinx.android.synthetic.main.activity_place_details.tvWeatherDescription
+import kotlinx.android.synthetic.main.places.placesRecyclerView
 import java.util.ArrayList
 
 class PlaceDetailsActivity : BaseActivity() {
@@ -65,6 +71,8 @@ class PlaceDetailsActivity : BaseActivity() {
             when (state) {
                 is PlaceDetailsPresenter.State.ShowForecast -> {
                     setForecastData(state.forecast)
+                    showDailyForecast(state.forecast.dailyWeather)
+                    showDailyTemperature(state.forecast.hourly)
                 }
             }
         }
@@ -95,10 +103,12 @@ class PlaceDetailsActivity : BaseActivity() {
 
         tvDate.text = forecast.currentDateString
 
+    }
 
+    fun showDailyTemperature(hourlyTemperature: List<Temperature>){
         val values = ArrayList<Entry>()
-        for (i in forecast.hourly.indices){
-            values.add(Entry(i.toFloat(), forecast.hourly[i].toFloat()))
+        for (i in hourlyTemperature.indices){
+            values.add(Entry(i.toFloat(), hourlyTemperature[i].toFloat()))
         }
 
         LineData(ForeCastLineSet(values)).apply {
@@ -114,6 +124,11 @@ class PlaceDetailsActivity : BaseActivity() {
         }
     }
 
+    fun showDailyForecast(dailyForecast: List<ForecastThumbnail>){
+        rvForecast.adapter = ForecastAdapter().apply {
+            results = dailyForecast
+        }
+    }
 
     companion object {
         private const val WOE_ID = "woe_Id"

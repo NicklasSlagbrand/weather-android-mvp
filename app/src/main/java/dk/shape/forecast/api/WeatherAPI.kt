@@ -22,7 +22,7 @@ interface WeatherAPI {
             @Query("lon") lon: Double?,
             @Query("lat") lat: Double?,
             @Query("units") units: String = "metric",
-            @Query("exclude") exclude: String = "minutely, daily"
+            @Query("exclude") exclude: String = "minutely"
     ): Call<ForecastResponse>
 }
 

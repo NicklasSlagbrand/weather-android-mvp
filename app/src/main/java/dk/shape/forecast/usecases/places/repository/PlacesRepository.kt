@@ -4,6 +4,7 @@ import dk.shape.forecast.AppConfig
 import dk.shape.forecast.api.WeatherAPI
 import dk.shape.forecast.entities.CurrentWeather
 import dk.shape.forecast.entities.Forecast
+import dk.shape.forecast.entities.ForecastThumbnail
 import dk.shape.forecast.entities.Place
 import dk.shape.forecast.entities.Temperature
 import dk.shape.forecast.entities.TemperatureUnit
@@ -113,6 +114,12 @@ private fun ForecastResponse.asForecast(): Forecast {
     val currentDate = currentWeather!!.dateTime!!
     val endDate = hourlyForecast[Constants.LIMIT_HOURLY_FORECAST-1].dateTime!!
     val feelsLike = currentWeather.feelsLike?.toInt() ?: 0
+    val dailyWeatherForecast = dailyWeather!!.map {
+        ForecastThumbnail(
+                dayOfTheWeek = it.dateTime!!.toDateString(),
+                iconUrl = "http://openweathermap.org/img/w/${it.weathers?.firstOrNull()?.icon}.png"
+        )
+    }
 
     val list: List<Temperature> = hourlyForecast.map {
         val temperature = it.temperature?.toInt() ?: 0
@@ -141,7 +148,9 @@ private fun ForecastResponse.asForecast(): Forecast {
                     feelsLike = Temperature(
                             value = feelsLike,
                             unit = TemperatureUnit.Celsius)
-            )
+            ),
+            dailyWeather = dailyWeatherForecast
+
     )
 }
 
