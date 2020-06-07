@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dk.shape.forecast">
+    package="dk.nicklasslagbrand.forecast">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,8 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
-        <activity android:name=".usecases.places.ui.details.PlaceDetailsActivity" />
-        <activity android:name=".usecases.places.ui.list.PlacesActivity">
+        <activity android:name="dk.nicklasslagbrand.forecast.usecases.places.ui.details.PlaceDetailsActivity" />
+        <activity android:name="dk.nicklasslagbrand.forecast.usecases.places.ui.list.PlacesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
