@@ -21,7 +21,7 @@ data class CurrentWeather(
 )
 
 data class ForecastThumbnail(
-//        val temperature: Temperature,
+        val temperature: Temperature,
         val iconUrl: String,
         val dayOfTheWeek: String
 )

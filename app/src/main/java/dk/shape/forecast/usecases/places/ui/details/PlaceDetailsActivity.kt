@@ -112,7 +112,7 @@ class PlaceDetailsActivity : BaseActivity() {
         }
 
         LineData(ForeCastLineSet(values)).apply {
-            setValueTextSize(9f)
+            setValueTextSize(12f)
             setValueFormatter(DefaultValueFormatter (0))
             setValueTextColor(Color.WHITE)
         }.also {

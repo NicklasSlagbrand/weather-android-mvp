@@ -15,8 +15,7 @@ interface PlaceDetailsInteractor {
     }
 }
 
-class PlaceDetailsInteractorImpl
-(
+class PlaceDetailsInteractorImpl(
         private val repository: PlacesRepository
 ) : PlaceDetailsInteractor {
 
@@ -34,7 +33,8 @@ class PlaceDetailsInteractorImpl
                                 getForecast(lon, lat)
                             }
                     )
-                }    }
+                }
+    }
 
 
     override var onStateChanged: (PlaceDetailsInteractor.State) -> Unit = {}

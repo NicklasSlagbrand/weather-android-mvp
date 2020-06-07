@@ -16,6 +16,8 @@ import dk.shape.forecast.usecases.places.repository.mapping.ForecastResponse
 import dk.shape.forecast.usecases.places.repository.mapping.Location
 import dk.shape.forecast.usecases.places.repository.mapping.SimplePlace
 import dk.shape.forecast.usecases.places.repository.mapping.SimplePlaceGroup
+import dk.shape.forecast.usecases.places.repository.mapping.asForecast
+import dk.shape.forecast.usecases.places.repository.mapping.asPlaces
 import dk.shape.forecast.utils.ui.extension.toDateString
 import retrofit2.Call
 import retrofit2.Callback
@@ -88,73 +90,6 @@ fun getWeatherForecast(lon: Double, lat: Double) : Promise<Forecast>{
     }
 }
 
-private fun SimplePlaceGroup.asPlaces(): List<Place> {
-    return places.orEmpty().map { it.asPlace() }
-}
 
 
-private fun SimplePlace.asPlace(): Place {
-    val country = getCountryNameFromCountryCode(details?.countryCode)
-    val temperature = parameters?.temperature?.toInt() ?: 0
 
-    return Place(
-            woeId = id.toString(),
-            location = location!!.copy(),
-            city = name ?: "",
-            country = country ?:"",
-            temperature = Temperature(
-                    value = temperature,
-                    unit = TemperatureUnit.Celsius),
-            weatherCode = weathers?.firstOrNull()?.id ?: 0)
-}
-
-
-private fun ForecastResponse.asForecast(): Forecast {
-    val startDate = hourlyForecast!!.first().dateTime!!
-    val currentDate = currentWeather!!.dateTime!!
-    val endDate = hourlyForecast[Constants.LIMIT_HOURLY_FORECAST-1].dateTime!!
-    val feelsLike = currentWeather.feelsLike?.toInt() ?: 0
-    val dailyWeatherForecast = dailyWeather!!.map {
-        ForecastThumbnail(
-                dayOfTheWeek = it.dateTime!!.toDateString(),
-                iconUrl = "http://openweathermap.org/img/w/${it.weathers?.firstOrNull()?.icon}.png"
-        )
-    }
-
-    val list: List<Temperature> = hourlyForecast.map {
-        val temperature = it.temperature?.toInt() ?: 0
-        Temperature(
-                value = temperature,
-                unit = TemperatureUnit.Celsius)
-    }.take(Constants.LIMIT_HOURLY_FORECAST)
-
-
-    return Forecast(
-            temperature = Temperature(
-                    value = currentWeather.temperature?.toInt() ?: 0,
-                    unit = TemperatureUnit.Celsius),
-            location = Location(
-                    longitude = longitude,
-                    latitude = latitude
-            ),
-            weatherDescription = this.currentWeather.weathers?.firstOrNull()?.description!!,
-            weatherCondition = this.currentWeather.weathers?.firstOrNull()?.main!!,
-            iconUrl = "http://openweathermap.org/img/w/${currentWeather.weathers?.firstOrNull()?.icon}.png",
-            hourly = list,
-            currentDateString = currentDate.toDateString(),
-            startDateString = startDate.toDateString(),
-            endDateString = endDate.toDateString(),
-            currentWeather = CurrentWeather(
-                    feelsLike = Temperature(
-                            value = feelsLike,
-                            unit = TemperatureUnit.Celsius)
-            ),
-            dailyWeather = dailyWeatherForecast
-
-    )
-}
-
-private fun getCountryNameFromCountryCode(countryCode: String?): String? {
-    val code = countryCode ?: return null
-    return Locale("", code).displayCountry
-}

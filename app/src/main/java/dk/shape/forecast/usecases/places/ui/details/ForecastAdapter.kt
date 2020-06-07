@@ -9,6 +9,7 @@ import dk.shape.forecast.utils.ui.extension.inflate
 import dk.shape.forecast.utils.ui.extension.loadImageWithFitCenter
 import kotlinx.android.synthetic.main.view_forecast_cardview.view.ivIcon
 import kotlinx.android.synthetic.main.view_forecast_cardview.view.tvDay
+import kotlinx.android.synthetic.main.view_forecast_cardview.view.tvDegrees
 import kotlin.properties.Delegates
 
 class ForecastAdapter : RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>() {
@@ -33,7 +34,7 @@ class ForecastAdapter : RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>
 
     class ForecastViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(item: ForecastThumbnail) {
-//            view.tvDegrees.text = "${item.temperature.value}${item.temperature.unit.postFix}"
+            view.tvDegrees.text = "${item.temperature.value}${item.temperature.unit.postFix}"
             view.ivIcon.loadImageWithFitCenter( item.iconUrl)
             view.tvDay.text = item.dayOfTheWeek
         }

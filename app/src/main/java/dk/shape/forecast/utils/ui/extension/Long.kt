@@ -8,7 +8,11 @@ import java.util.Locale
 fun Long.toDateString() : String{
     val date = Date(this * 1000L)
     val sdf = SimpleDateFormat("dd-MMM HH:mm", Locale.getDefault())
-//        val cal: Calendar = Calendar.getInstance()
-//        sdf.timeZone = cal.timeZone
+    return sdf.format(date)
+}
+
+fun Long.toWeekDayString() : String{
+    val date = Date(this * 1000L)
+    val sdf = SimpleDateFormat("EEE", Locale.getDefault())
     return sdf.format(date)
 }
