@@ -7,7 +7,6 @@ interface PlaceDetailsInteractor {
     var onStateChanged: (State) -> Unit
     fun getForecast(lon: Double, lat: Double)
 
-
     sealed class State {
         class ShowForecast(val forecast: Forecast) : State()
         object Loading : State()
@@ -18,7 +17,6 @@ interface PlaceDetailsInteractor {
 class PlaceDetailsInteractorImpl(
         private val repository: PlacesRepository
 ) : PlaceDetailsInteractor {
-
     override fun getForecast(lon: Double, lat: Double) {
         state = PlaceDetailsInteractor.State.Loading
         repository.getWeatherForecast(lon,lat)

@@ -1,6 +1,6 @@
 package dk.nicklasslagbrand.forecast.api
 
-import dk.nicklasslagbrand.forecast.usecases.places.repository.mapping.ForecastResponse
+import dk.nicklasslagbrand.forecast.usecases.places.repository.mapping.ForecastOneCallResponse
 import dk.nicklasslagbrand.forecast.usecases.places.repository.mapping.SimplePlaceGroup
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -22,7 +22,7 @@ interface WeatherAPI {
             @Query("lat") lat: Double?,
             @Query("units") units: String = "metric",
             @Query("exclude") exclude: String = "minutely"
-    ): Call<ForecastResponse>
+    ): Call<ForecastOneCallResponse>
 }
 
 fun initHttpClient(apiKey: String): OkHttpClient {

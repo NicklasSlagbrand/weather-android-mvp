@@ -1,4 +1,4 @@
-package dk.nicklasslagbrand.forecast.usecases.places.ui.details
+package dk.nicklasslagbrand.forecast.utils.ui.extension
 
 import android.graphics.Color
 import com.github.mikephil.charting.data.Entry
@@ -17,9 +17,7 @@ class ForeCastLineSet(values: ArrayList<Entry>): LineDataSet(values, "") {
         lineWidth = 1.8f
         circleRadius = 4f
         setCircleColor(Color.WHITE)
-//        highLightColor = Color.rgb(244, 117, 117)
         color = Color.WHITE
-//        fillColor = Color.BLACK
         fillAlpha = 0
         setDrawHorizontalHighlightIndicator(false)
     }

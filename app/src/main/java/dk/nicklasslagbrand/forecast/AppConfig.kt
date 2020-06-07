@@ -39,9 +39,8 @@ object AppConfig {
                             weatherAPI = weatherAPI
                     )
             )
-    fun initPlaceDetailsConfig(activity: AppCompatActivity) =
+    fun initPlaceDetailsConfig() =
             PlaceDetailsConfig(
-                    activity = activity,
                     placesRepository = PlacesRepository(
                             weatherAPI = weatherAPI
                     )

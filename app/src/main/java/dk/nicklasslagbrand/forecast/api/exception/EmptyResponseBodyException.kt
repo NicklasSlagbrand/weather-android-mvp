@@ -1,4 +1,4 @@
-package dk.nicklasslagbrand.forecast.usecases.exception
+package dk.nicklasslagbrand.forecast.api.exception
 
 import java.lang.Exception
 

@@ -16,15 +16,21 @@ import dk.nicklasslagbrand.forecast.entities.Temperature
 import dk.nicklasslagbrand.forecast.entities.toFloat
 import dk.nicklasslagbrand.forecast.utils.ui.BaseActivity
 import dk.nicklasslagbrand.forecast.utils.ui.celsiusToColor
+import dk.nicklasslagbrand.forecast.utils.ui.extension.ForeCastLineSet
 import dk.nicklasslagbrand.forecast.utils.ui.extension.applyLocationDetailsStyle
+import dk.nicklasslagbrand.forecast.utils.ui.extension.gone
 import dk.nicklasslagbrand.forecast.utils.ui.extension.loadImage
 import dk.nicklasslagbrand.forecast.utils.ui.extension.toTitleCase
 import dk.nicklasslagbrand.forecast.utils.ui.extension.visible
 import dk.nicklasslagbrand.forecast.utils.ui.toImageUrl
 import kotlinx.android.synthetic.main.activity_place_details.chart1
+import kotlinx.android.synthetic.main.activity_place_details.clCurrentWeather
 import kotlinx.android.synthetic.main.activity_place_details.clRoot
+import kotlinx.android.synthetic.main.activity_place_details.clTemp
 import kotlinx.android.synthetic.main.activity_place_details.ivWeatherBackground
 import kotlinx.android.synthetic.main.activity_place_details.ivWeatherIcon
+import kotlinx.android.synthetic.main.activity_place_details.pbPlaceDetails
+import kotlinx.android.synthetic.main.activity_place_details.rvDailyForecast
 import kotlinx.android.synthetic.main.activity_place_details.rvForecast
 import kotlinx.android.synthetic.main.activity_place_details.tvDate
 import kotlinx.android.synthetic.main.activity_place_details.tvDegrees
@@ -37,7 +43,7 @@ import java.util.ArrayList
 
 class PlaceDetailsActivity : BaseActivity() {
 
-    private val config by lazy { AppConfig.initPlaceDetailsConfig(activity = this) }
+    private val config by lazy { AppConfig.initPlaceDetailsConfig() }
     private var woeId: String? = null
     private var locationName: String? = null
     private var lon: Double? = null
@@ -70,6 +76,13 @@ class PlaceDetailsActivity : BaseActivity() {
                     setForecastData(state.forecast)
                     showDailyForecast(state.forecast.dailyWeather)
                     showDailyTemperature(state.forecast.hourly)
+                    pbPlaceDetails.gone()
+                    clCurrentWeather.visible()
+                    clTemp.visible()
+                    rvDailyForecast.visible()
+                }
+                is PlaceDetailsPresenter.State.Loading ->{
+                    pbPlaceDetails.visible()
                 }
             }
         }
@@ -102,7 +115,7 @@ class PlaceDetailsActivity : BaseActivity() {
 
     }
 
-    fun showDailyTemperature(hourlyTemperature: List<Temperature>){
+    private fun showDailyTemperature(hourlyTemperature: List<Temperature>){
         val values = ArrayList<Entry>()
         for (i in hourlyTemperature.indices){
             values.add(Entry(i.toFloat(), hourlyTemperature[i].toFloat()))
@@ -121,7 +134,7 @@ class PlaceDetailsActivity : BaseActivity() {
         }
     }
 
-    fun showDailyForecast(dailyForecast: List<ForecastThumbnail>){
+    private fun showDailyForecast(dailyForecast: List<ForecastThumbnail>){
         rvForecast.adapter = ForecastAdapter().apply {
             results = dailyForecast
         }

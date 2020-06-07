@@ -5,9 +5,9 @@ import dk.nicklasslagbrand.forecast.api.WeatherAPI
 import dk.nicklasslagbrand.forecast.entities.Forecast
 import dk.nicklasslagbrand.forecast.entities.Place
 import dk.nicklasslagbrand.forecast.framework.Promise
-import dk.nicklasslagbrand.forecast.usecases.exception.EmptyResponseBodyException
-import dk.nicklasslagbrand.forecast.usecases.exception.UnSuccessfullResponseException
-import dk.nicklasslagbrand.forecast.usecases.places.repository.mapping.ForecastResponse
+import dk.nicklasslagbrand.forecast.api.exception.EmptyResponseBodyException
+import dk.nicklasslagbrand.forecast.api.exception.UnSuccessfullResponseException
+import dk.nicklasslagbrand.forecast.usecases.places.repository.mapping.ForecastOneCallResponse
 import dk.nicklasslagbrand.forecast.usecases.places.repository.mapping.SimplePlaceGroup
 import dk.nicklasslagbrand.forecast.usecases.places.repository.mapping.asForecast
 import dk.nicklasslagbrand.forecast.usecases.places.repository.mapping.asPlaces
@@ -55,8 +55,8 @@ fun getWeatherForecast(lon: Double, lat: Double) : Promise<Forecast>{
         val promise = Promise<Forecast>()
 
         weatherAPI.getWeatherForecast(lon, lat).enqueue(
-            object : Callback<ForecastResponse> {
-                override fun onResponse(call: Call<ForecastResponse>, response: Response<ForecastResponse>) {
+            object : Callback<ForecastOneCallResponse> {
+                override fun onResponse(call: Call<ForecastOneCallResponse>, response: Response<ForecastOneCallResponse>) {
 
                     when(response.isSuccessful) {
                         false -> promise.error(UnSuccessfullResponseException(response.code().toString()))
@@ -72,7 +72,7 @@ fun getWeatherForecast(lon: Double, lat: Double) : Promise<Forecast>{
                     }
 
                 }
-                override fun onFailure(call: Call<ForecastResponse>, t: Throwable) {
+                override fun onFailure(call: Call<ForecastOneCallResponse>, t: Throwable) {
                     promise.error(t)
                 }
             }

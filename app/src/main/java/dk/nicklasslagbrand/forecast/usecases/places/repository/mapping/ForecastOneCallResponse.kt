@@ -10,7 +10,7 @@ import dk.nicklasslagbrand.forecast.usecases.Constants
 import dk.nicklasslagbrand.forecast.utils.ui.extension.toDateString
 import dk.nicklasslagbrand.forecast.utils.ui.extension.toWeekDayString
 
-data class ForecastResponse(
+data class ForecastOneCallResponse(
         @SerializedName("lat") val latitude: Double?,
         @SerializedName("lon") val longitude: Double?,
         @SerializedName("hourly") val hourlyForecast: List<HourlytWeatherForecast>?,
@@ -38,7 +38,7 @@ data class DailyTemperature(
         @SerializedName("day") val temperature: Float?
 )
 
-fun ForecastResponse.asForecast(): Forecast {
+fun ForecastOneCallResponse.asForecast(): Forecast {
     val startDate = hourlyForecast!!.first().dateTime!!
     val currentDate = currentWeather!!.dateTime!!
     val endDate = hourlyForecast[Constants.LIMIT_HOURLY_FORECAST-1].dateTime!!

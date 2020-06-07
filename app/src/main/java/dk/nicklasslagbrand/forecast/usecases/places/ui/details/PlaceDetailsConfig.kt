@@ -1,25 +1,13 @@
 package dk.nicklasslagbrand.forecast.usecases.places.ui.details
 
-import android.support.v7.app.AppCompatActivity
-import dk.nicklasslagbrand.forecast.usecases.places.PlacesRouter
-import dk.nicklasslagbrand.forecast.usecases.places.PlacesRouterImpl
 import dk.nicklasslagbrand.forecast.usecases.places.repository.PlacesRepository
 
 /**
  * Configures the Places Use Case.
  *
- * @param activity The parent activity used to launch new activities and manage lifecycle events.
  * @param placesRepository Repository used to fetch Places.
  */
-class PlaceDetailsConfig(activity: AppCompatActivity,
-                         placesRepository: PlacesRepository) {
-
-    /**
-     * Provides routing from the Places screen to any other screens.
-     */
-    val router: PlacesRouter = PlacesRouterImpl(
-            activity = activity
-    )
+class PlaceDetailsConfig(placesRepository: PlacesRepository) {
 
     /**
      * Handles business logic to manipulate model objects and carry out tasks for
