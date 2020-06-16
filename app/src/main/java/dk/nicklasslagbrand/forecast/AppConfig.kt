@@ -1,11 +1,11 @@
 package dk.nicklasslagbrand.forecast
 
-import android.support.v7.app.AppCompatActivity
 import dk.nicklasslagbrand.forecast.api.initHttpClient
 import dk.nicklasslagbrand.forecast.api.initWeatherAPI
 import dk.nicklasslagbrand.forecast.usecases.places.PlacesConfig
 import dk.nicklasslagbrand.forecast.usecases.places.repository.PlacesRepository
 import dk.nicklasslagbrand.forecast.usecases.places.ui.details.PlaceDetailsConfig
+import dk.nicklasslagbrand.forecast.utils.ui.BaseActivity
 
 object AppConfig {
     val woeIds = listOf(
@@ -32,7 +32,7 @@ object AppConfig {
      *
      * @param The parent activity used to launch new activities and manage lifecycle events.
      */
-    fun initPlacesConfig(activity: AppCompatActivity) =
+    fun initPlacesConfig(activity: BaseActivity) =
             PlacesConfig(
                     activity = activity,
                     placesRepository = PlacesRepository(

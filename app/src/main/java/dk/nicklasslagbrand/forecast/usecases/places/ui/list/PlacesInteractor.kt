@@ -1,8 +1,8 @@
 package dk.nicklasslagbrand.forecast.usecases.places.ui.list
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import dk.nicklasslagbrand.forecast.entities.Place
 import dk.nicklasslagbrand.forecast.usecases.places.PlacesRouter
 import dk.nicklasslagbrand.forecast.usecases.places.repository.PlacesRepository

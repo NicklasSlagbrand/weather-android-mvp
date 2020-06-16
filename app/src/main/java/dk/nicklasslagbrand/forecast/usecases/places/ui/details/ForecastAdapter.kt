@@ -1,8 +1,8 @@
 package dk.nicklasslagbrand.forecast.usecases.places.ui.details
 
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import dk.nicklasslagbrand.forecast.R
 import dk.nicklasslagbrand.forecast.entities.ForecastThumbnail
 import dk.nicklasslagbrand.forecast.utils.ui.extension.inflate

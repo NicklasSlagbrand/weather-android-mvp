@@ -1,11 +1,11 @@
 package dk.nicklasslagbrand.forecast.usecases.places
 
-import android.support.v7.app.AppCompatActivity
 import dk.nicklasslagbrand.forecast.usecases.places.repository.PlacesRepository
 import dk.nicklasslagbrand.forecast.usecases.places.ui.list.PlacesInteractor
 import dk.nicklasslagbrand.forecast.usecases.places.ui.list.PlacesInteractorImpl
 import dk.nicklasslagbrand.forecast.usecases.places.ui.list.PlacesPresenter
 import dk.nicklasslagbrand.forecast.usecases.places.ui.list.PlacesPresenterImpl
+import dk.nicklasslagbrand.forecast.utils.ui.BaseActivity
 
 /**
  * Configures the Places Use Case.
@@ -13,7 +13,7 @@ import dk.nicklasslagbrand.forecast.usecases.places.ui.list.PlacesPresenterImpl
  * @param activity The parent activity used to launch new activities and manage lifecycle events.
  * @param placesRepository Repository used to fetch Places.
  */
-class PlacesConfig(activity: AppCompatActivity,
+class PlacesConfig(activity: BaseActivity,
                    placesRepository: PlacesRepository) {
 
     /**

@@ -1,10 +1,10 @@
 package dk.nicklasslagbrand.forecast.usecases.places.ui.list
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import dk.nicklasslagbrand.forecast.R
 import dk.nicklasslagbrand.forecast.AppConfig
+import dk.nicklasslagbrand.forecast.utils.ui.BaseActivity
 import kotlinx.android.synthetic.main.places.*
 
 /**
@@ -12,14 +12,14 @@ import kotlinx.android.synthetic.main.places.*
  * lifecycle of the Places use case. After initializing the PlacesConfig, the PlacesActivity will
  * react to UI state changes from the PlacesPresenter and display the given UI on screen.
  */
-class PlacesActivity : AppCompatActivity() {
+class PlacesActivity : BaseActivity() {
 
     private val placesConfig by lazy { AppConfig.initPlacesConfig(activity = this) }
 
+    override fun provideLayoutId(): Int? = R.layout.page_places
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.page_places)
-
         placesConfig.presenter.onStateChanged = { state ->
             when (state) {
                 is PlacesPresenter.State.Content -> {

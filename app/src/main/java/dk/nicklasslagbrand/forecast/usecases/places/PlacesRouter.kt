@@ -4,7 +4,6 @@ import android.app.Activity
 import dk.nicklasslagbrand.forecast.usecases.places.ui.details.PlaceDetailsActivity
 import java.lang.ref.WeakReference
 
-
 interface PlacesRouter {
     fun onPlaceSelected(
             woeId: String,
