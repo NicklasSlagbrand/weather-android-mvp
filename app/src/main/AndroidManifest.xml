@@ -12,9 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
-        <activity android:name=".usecases.places.MainActivity"></activity>
-        <activity android:name=".usecases.places.ui.details.PlaceDetailsActivity" />
-        <activity android:name=".usecases.places.ui.list.PlacesActivity">
+        <activity android:name="dk.nicklasslagbrand.forecast.presentation.places.MainActivity"></activity>
+        <activity android:name="dk.nicklasslagbrand.forecast.presentation.places.ui.details.PlaceDetailsActivity" />
+        <activity android:name="dk.nicklasslagbrand.forecast.presentation.places.ui.list.PlacesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/clRoot"
     tools:background="@color/temperature1"
-    tools:context=".usecases.places.ui.details.PlaceDetailsActivity">
+    tools:context=".presentation.places.ui.details.PlaceDetailsActivity">
 
     <ImageView
         android:id="@+id/ivWeatherBackground"
@@ -25,28 +25,15 @@
         android:layout_marginStart="16dp"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:paddingStart="8dp"
         android:textColor="@android:color/black"
         tools:text="24 May " />
 
-    <TextView
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/tvLocationName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:paddingEnd="8dp"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginEnd="16dp"
-        android:textColor="@android:color/black"
-        tools:text="London" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="@id/tvLocationName"
-        app:layout_constraintStart_toStartOf="@id/tvDate"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDate"
         android:background="@drawable/rectangle_rounded_transparent"
         android:id="@+id/clCurrentWeather"
